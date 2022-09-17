@@ -1,25 +1,17 @@
 package com.tminto.controller;
 
-
-
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.tminto.common.R;
 import com.tminto.domain.EduTeacher;
+import com.tminto.domain.vo.TeachQuery;
 import com.tminto.service.EduTeacherService;
-import io.swagger.models.auth.In;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
 @RestController
-@RequestMapping("/serviceedu/teacher")
+@RequestMapping("/edu/teacher")
 public class EduTeacherController {
 
     @Autowired
@@ -32,11 +24,38 @@ public class EduTeacherController {
     }
 
     @GetMapping("list/{current}/{limit}")
-    public R pageList(@PathVariable Integer current, @PathVariable Integer limit) {
-        Page<EduTeacher> pageTeacher = new Page<>(current, limit);
-        eduTeacherService.page(pageTeacher, null);
+    public R pageList(@PathVariable Integer current,
+                      @PathVariable Integer limit,
+                      TeachQuery teachQuery) {
+        Page<EduTeacher> pageTeacher = eduTeacherService.page(current, limit,teachQuery);
         return R.ok().data("page",pageTeacher);
     }
+
+    @PostMapping("")
+    public R addTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean result = eduTeacherService.save(eduTeacher);
+        return result ? R.ok() : R.error();
+    }
+
+    @DeleteMapping("{id}")
+    public R deleteTeacher(@PathVariable String id) {
+        boolean result = eduTeacherService.removeById(id);
+        return result ? R.ok() : R.error();
+    }
+
+    @GetMapping("{id}")
+    public R getTeacher(@PathVariable String id) {
+        EduTeacher eduTeacher = eduTeacherService.getById(id);
+        return R.ok().data("teacher", eduTeacher);
+    }
+
+    @PutMapping("")
+    public R modifyTeacher(@RequestBody EduTeacher eduTeacher) {
+        boolean result = eduTeacherService.updateById(eduTeacher);
+        return result ? R.ok() : R.error();
+    }
+
+
 
 }
 
