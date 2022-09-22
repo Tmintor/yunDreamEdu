@@ -8,7 +8,7 @@ package com.tminto.common;
  */
 public class ResultCode {
 
-    public static final Integer SUCCESS = 200;
-    public static final Integer FAIL = 201;
+    public static final Integer SUCCESS = 20000;
+    public static final Integer FAIL = 20001;
 
 }

@@ -1,4 +1,4 @@
-package com;
+package com.tminto;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

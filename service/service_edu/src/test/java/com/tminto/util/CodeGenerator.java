@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 public class CodeGenerator {
 
 
-    /*@Test
+    @Test
     public void main1() {
 
         // 1、创建代码生成器
@@ -34,10 +34,10 @@ public class CodeGenerator {
         gc.setAuthor("tminto");
         gc.setOpen(false); //生成后是否打开资源管理器
         gc.setFileOverride(false); //重新生成时文件是否覆盖
-        *//*
+        /*
          * mp生成service层代码，默认接口名称第一个字母有 I
          * UcenterService
-         * *//*
+         * */
         gc.setServiceName("%sService");    //去掉Service接口的首字母I
         gc.setIdType(IdType.ID_WORKER_STR); //主键策略
         gc.setDateType(DateType.ONLY_DATE);//定义生成的实体类中日期类型
@@ -48,7 +48,7 @@ public class CodeGenerator {
         // 3、数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
         dsc.setUrl("jdbc:mysql://localhost:3306/yundream?serverTimezone=GMT%2B8");
-        dsc.setDriverName("com.mysql.cj.jdbc.Driver");
+        dsc.setDriverName("com.mysql.jdbc.Driver");
         dsc.setUsername("root");
         dsc.setPassword("651490");
         dsc.setDbType(DbType.MYSQL);
@@ -56,7 +56,7 @@ public class CodeGenerator {
 
         // 4、包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("serviceedu"); //模块名
+        pc.setModuleName(""); //模块名
         pc.setParent("com.tminto");
         pc.setController("controller");
         pc.setEntity("domain");
@@ -66,7 +66,7 @@ public class CodeGenerator {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_subject");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
@@ -80,5 +80,5 @@ public class CodeGenerator {
 
         // 6、执行
         mpg.execute();
-    }*/
+    }
 }

@@ -1,0 +1,12 @@
+server:
+  port: 8002
+spring:
+  profiles:
+    active: dev
+aliyun:
+  oss:
+    file:
+      endpoint: oss-cn-guangzhou.aliyuncs.com
+      keyid: LTAI5tKzcuNvyr8HXizh7XkB
+      keysecret: 3l95gHC61TRFIXcYaHh6VJWPKXBLmR
+      bucketname: yundream-edu
