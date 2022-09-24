@@ -3,6 +3,9 @@ package com.tminto.domain.vo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+/**
+ * 教师条件查询对应实体类
+ */
 @Data
 public class TeachQuery {
 

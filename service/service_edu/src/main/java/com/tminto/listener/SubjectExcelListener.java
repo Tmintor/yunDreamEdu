@@ -5,11 +5,13 @@ import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tminto.domain.EduSubject;
-import com.tminto.domain.SubjectData;
+import com.tminto.domain.excel.SubjectData;
 import com.tminto.service.EduSubjectService;
-
 import java.util.Map;
 
+/**
+ * Excel导入监听
+ */
 public class SubjectExcelListener extends AnalysisEventListener<SubjectData> {
 
     public EduSubjectService eduSubjectService;
