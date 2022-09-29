@@ -17,4 +17,6 @@ import java.util.Map;
 public interface EduChapterService extends IService<EduChapter> {
 
     List<Map<String, Object>> getAllChapterVideoByCourseId(String courseId);
+
+    void deleteById(String chapterId);
 }

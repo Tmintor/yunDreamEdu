@@ -4,6 +4,8 @@ import com.tminto.domain.EduVideo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程视频 Mapper 接口
@@ -15,4 +17,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface EduVideoMapper extends BaseMapper<EduVideo> {
 
+    List<String> selectAllVodIdByCourseId(String id);
 }

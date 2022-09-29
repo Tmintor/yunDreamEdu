@@ -64,4 +64,16 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
         return allChapterVideo;
     }
+
+    @Override
+    public void deleteById(String chapterId) {
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("chapter_id", chapterId);
+        Integer count = eduVideoMapper.selectCount(wrapper);
+        if (count > 0) {
+            throw new RuntimeException("该章节含有小节，不能进行删除");
+        } else {
+            baseMapper.deleteById(chapterId);
+        }
+    }
 }
