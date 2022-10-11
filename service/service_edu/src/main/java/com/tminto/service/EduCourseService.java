@@ -1,9 +1,11 @@
 package com.tminto.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tminto.controller.front.CourseWebVo;
 import com.tminto.domain.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.tminto.domain.vo.CourseInfoVo;
+import com.tminto.domain.vo.CourseQueryVo;
 
 import java.util.Map;
 
@@ -23,7 +25,11 @@ public interface EduCourseService extends IService<EduCourse> {
 
     void updateStatus(String id);
 
-    Page<EduCourse> getCourseList(Integer current, Integer limit);
+    Page<EduCourse> getCourseList(Integer current, Integer limit, CourseQueryVo courseQueryVo);
 
     void deleteCourseInfo(String id);
+
+    Page<EduCourse> getCoursePageList(Integer current, Integer limit);
+
+    CourseWebVo getCourseDetail(String id);
 }

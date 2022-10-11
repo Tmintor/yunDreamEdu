@@ -33,21 +33,23 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         Page<EduTeacher> pageTeacher = new Page<>(current, limit);
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<EduTeacher>();
 
-        String name = teachQuery.getName();
-        String begin = teachQuery.getBegin();
-        String end = teachQuery.getEnd();
-        Integer level = teachQuery.getLevel();
-        if (!StringUtils.isEmpty(name)) {
-            wrapper.like("name", name);
-        }
-        if (!StringUtils.isEmpty(begin)) {
-            wrapper.ge("gmt_create", begin);
-        }
-        if (!StringUtils.isEmpty(end)) {
-            wrapper.le("gmt_create", end);
-        }
-        if (!StringUtils.isEmpty(level)){
-            wrapper.eq("level", level);
+        if (teachQuery != null) {
+            String name = teachQuery.getName();
+            String begin = teachQuery.getBegin();
+            String end = teachQuery.getEnd();
+            Integer level = teachQuery.getLevel();
+            if (!StringUtils.isEmpty(name)) {
+                wrapper.like("name", name);
+            }
+            if (!StringUtils.isEmpty(begin)) {
+                wrapper.ge("gmt_create", begin);
+            }
+            if (!StringUtils.isEmpty(end)) {
+                wrapper.le("gmt_create", end);
+            }
+            if (!StringUtils.isEmpty(level)){
+                wrapper.eq("level", level);
+            }
         }
         wrapper.orderByDesc("gmt_create");
         eduTeacherMapper.selectPage(pageTeacher,wrapper);

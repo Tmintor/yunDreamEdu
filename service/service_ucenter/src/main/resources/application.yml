@@ -1,0 +1,41 @@
+server:
+  port: 8160
+spring:
+  application:
+    name: service-ucenter
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/yundream
+    username: root
+    password: 651490
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 1800000
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 5
+        min-idle: 0
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+  mapper-locations: classpath:com/tminto/mapper/xml/*.xml
+
+wx:
+  open:
+    app_id: wxed9954c01bb89b47
+    app_secret: a7482517235173ddb4083788de60b90e
+    redirect_url: http://localhost:8160/api/ucenter/wx/callback
+

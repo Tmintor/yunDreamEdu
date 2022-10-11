@@ -22,7 +22,7 @@ public class EduCourseController {
 
     @PostMapping("/list/{current}/{limit}")
     public R getCourseList(@PathVariable Integer current, @PathVariable Integer limit) {
-        Page<EduCourse> page = eduCourseService.getCourseList(current,limit);
+        Page<EduCourse> page = eduCourseService.getCoursePageList(current,limit);
         return R.ok().data("list", page);
     }
 

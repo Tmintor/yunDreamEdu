@@ -3,11 +3,13 @@ package com.tminto.service.impl;
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.tminto.controller.front.CourseWebVo;
 import com.tminto.domain.EduChapter;
 import com.tminto.domain.EduCourse;
 import com.tminto.domain.EduCourseDescription;
 import com.tminto.domain.EduVideo;
 import com.tminto.domain.vo.CourseInfoVo;
+import com.tminto.domain.vo.CourseQueryVo;
 import com.tminto.feign.EduVodFeign;
 import com.tminto.mapper.EduChapterMapper;
 import com.tminto.mapper.EduCourseDescriptionMapper;
@@ -22,7 +24,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.Query;
 import java.util.List;
 import java.util.Map;
 
@@ -112,9 +113,29 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     }
 
     @Override
-    public Page<EduCourse> getCourseList(Integer current, Integer limit) {
+    public Page<EduCourse> getCourseList(Integer current, Integer limit, CourseQueryVo courseQueryVo) {
         Page<EduCourse> page = new Page<>(current, limit);
-        baseMapper.selectPage(page, null);
+        if (courseQueryVo == null) {
+            baseMapper.selectPage(page, null);
+        } else {
+            QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+            if (!StringUtils.isEmpty(courseQueryVo.getSubjectParentId())){//一级分类
+                wrapper.eq("subject_parent_id",courseQueryVo.getSubjectParentId());
+            }
+            if (!StringUtils.isEmpty(courseQueryVo.getSubjectId())){//二级分类
+                wrapper.eq("subject_id",courseQueryVo.getSubjectId());
+            }
+            if (!StringUtils.isEmpty(courseQueryVo.getBuyCountSort())) {//销量排序
+                wrapper.orderByDesc("buy_count");
+            }
+            if (!StringUtils.isEmpty(courseQueryVo.getGmtCreateSort())) {//时间排序
+                wrapper.orderByDesc("gmt_create");
+            }
+            if (!StringUtils.isEmpty(courseQueryVo.getPriceSort())) {//价格排序
+                wrapper.orderByDesc("price");
+            }
+            baseMapper.selectPage(page,wrapper);
+        }
         return page;
     }
 
@@ -148,6 +169,19 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         QueryWrapper<EduCourse> courseQueryWrapper = new QueryWrapper<>();
         courseQueryWrapper.eq("id", id);
         eduCourseMapper.delete(courseQueryWrapper);
+    }
+
+    @Override
+    public Page<EduCourse> getCoursePageList(Integer current, Integer limit) {
+        Page<EduCourse> page = new Page<>();
+        baseMapper.selectPage(page, null);
+        return page;
+    }
+
+    @Override
+    public CourseWebVo getCourseDetail(String id) {
+
+        return baseMapper.selectAllCourseDetail(id);
     }
 
 

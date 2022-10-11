@@ -55,6 +55,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
                     Map<String, Object> videoMap = new HashMap<>();
                     videoMap.put("id", e.getId());
                     videoMap.put("title", e.getTitle());
+                    videoMap.put("videoSourceId", e.getVideoSourceId());
                     VideoList.add(videoMap);
                 }
             });

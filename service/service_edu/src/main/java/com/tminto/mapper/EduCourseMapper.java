@@ -1,5 +1,6 @@
 package com.tminto.mapper;
 
+import com.tminto.controller.front.CourseWebVo;
 import com.tminto.domain.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,6 @@ import java.util.Map;
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
 
     Map<String, Object> selectAllCourseInfo(String id);
+
+    CourseWebVo selectAllCourseDetail(String id);
 }

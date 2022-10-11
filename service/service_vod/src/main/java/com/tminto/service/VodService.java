@@ -11,4 +11,6 @@ public interface VodService {
     String upLoadVideo(MultipartFile multipartFile);
 
     void deleteVideo(String id);
+
+    String getPlayAuth(String vid);
 }

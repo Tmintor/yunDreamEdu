@@ -4,10 +4,13 @@ import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
+import com.tminto.common.R;
 import com.tminto.service.VodService;
 import com.tminto.util.InitVideoClientUtil;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,6 +68,23 @@ public class VodServiceImpl implements VodService {
         }
     }
 
+    @Override
+    public String getPlayAuth(String vid) {
+        GetVideoPlayAuthRequest request = null;
+        GetVideoPlayAuthResponse response = null;
+        try {
+            DefaultAcsClient client = InitVideoClientUtil.initVodClient(accessKeyId, accessKeySecret);
+            request = new GetVideoPlayAuthRequest();
+            //向request对象中设置视频id
+            request.setVideoId(vid);
+
+            //调用方法获得凭证
+            response = client.getAcsResponse(request);
+        } catch (ClientException e) {
+            throw new RuntimeException("获取视频凭证失败");
+        }
+        return response.getPlayAuth();
+    }
 
 
 }

@@ -19,4 +19,32 @@
                  LEFT JOIN edu_subject es2 ON es2.id = ec.subject_id
         WHERE ec.id = #{id}
     </select>
+
+    <!--    根据课程id，编写sql语句查询课程信息-->
+    <select id="selectAllCourseDetail" resultType="com.tminto.controller.front.CourseWebVo">
+        SELECT ec.id,
+               ec.title,
+               ec.price,
+               ec.lesson_num AS lessonNum,
+               ec.cover,
+               ec.buy_count  AS buyCount,
+               ec.view_count AS viewCount,
+               ecd.description,
+               et.id         AS teacherId,
+               et.name       AS teacherName,
+               et.intro,
+               et.avatar,
+               es1.id        AS subjectLevelOneId,
+               es1.title     AS subjectLevelOne,
+               es2.id        AS subjectLevelTwoId,
+               es2.title     AS subjectLevelTwo
+        FROM edu_course ec
+                 LEFT OUTER JOIN edu_course_description ecd ON ec.id = ecd.id
+                 LEFT OUTER JOIN edu_teacher et ON ec.teacher_id = et.id
+                 LEFT OUTER JOIN edu_subject es1 ON ec.subject_parent_id = es1.id
+                 LEFT OUTER JOIN edu_subject es2 ON ec.subject_id = es2.id
+        WHERE ec.id = #{courseId}
+    </select>
+
+
 </mapper>

@@ -30,5 +30,11 @@ public class VodController {
         return R.ok();
     }
 
+    @GetMapping("/PlayAuth/{vid}")
+    public R getPlayAuth(@PathVariable String vid) {
+        String playAuth = vodService.getPlayAuth(vid);
+        return R.ok().data("playAuth", playAuth);
+    }
+
 
 }
