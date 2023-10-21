@@ -12,7 +12,7 @@ spring:
 aliyun:
   oss:
     file:
-      endpoint: oss-cn-guangzhou.aliyuncs.com
-      keyid: LTAI5tKzcuNvyr8HXizh7XkB
-      keysecret: 3l95gHC61TRFIXcYaHh6VJWPKXBLmR
-      bucketname: yundream-edu
+      endpoint: xxx
+      keyid: xxx
+      keysecret: xxx
+      bucketname: xxx
