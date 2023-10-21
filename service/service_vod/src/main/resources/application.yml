@@ -16,5 +16,5 @@ spring:
 aliyun:
   oss:
     file:
-      keyid: LTAI5tKzcuNvyr8HXizh7XkB
-      keysecret: 3l95gHC61TRFIXcYaHh6VJWPKXBLmR
+      keyid: xxx
+      keysecret: xxx
